@@ -1,0 +1,71 @@
+{
+  "name": "svelte-project-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "node src/varlockSync.ts && concurrently -c \"#c596c7\",\"#676778\",\"#4b32c3\",\"#fafafa\" --kill-others-on-fail \"npm:lint:*\"",
+    "lint:prettier": "prettier --check .",
+    "lint:svelte-check": "svelte-check --fail-on-warnings",
+    "lint:eslint": "eslint --max-warnings=0",
+    "lint:stylelint": "stylelint --max-warnings=0 \"src/**/*.{css,svelte}\"",
+    "format": "eslint --fix && stylelint --fix \"src/**/*.{css,svelte}\" && prettier --write .",
+    "api-types": "npx openapi-typescript@latest --output src/services/api-types.gen.ts https://raw.githubusercontent.com/arnu515/jsonplaceholder-api-docs/refs/heads/master/openapi.yaml && eslint --fix src/services/api-types.gen.ts && prettier --write src/services/api-types.gen.ts",
+    "preinstall": "npx -y only-allow pnpm",
+    "prepare": "husky || true"
+  },
+  "lint-staged": {
+    "*.{ts,svelte}": [
+      "svelte-check --fail-on-warnings --diagnostic-sources \"js,svelte\""
+    ],
+    "*.{ts,svelte,js,cjs,mjs}": [
+      "eslint --max-warnings 0 --no-ignore"
+    ],
+    "*.{ts,js,svelte,css,scss,json,html}": [
+      "prettier --check"
+    ]
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/kit": "^2.70.1",
+    "@sveltejs/vite-plugin-svelte": "7.2.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.1.2",
+    "@varlock/vite-integration": "^1.4.0",
+    "autoprefixer": "^10.5.4",
+    "concurrently": "^10.0.4",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-only-warn": "^1.2.1",
+    "eslint-plugin-svelte": "3.22.0",
+    "globals": "^17.8.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.2.0",
+    "postcss": "^8.5.24",
+    "postcss-html": "^1.8.1",
+    "postcss-preset-env": "^11.3.2",
+    "prettier": "^3.9.6",
+    "prettier-plugin-svelte": "^4.1.1",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "stylelint": "^17.14.1",
+    "stylelint-config-clean-order": "^10.0.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-prettier": "^5.0.3",
+    "svelte": "^5.56.8",
+    "svelte-check": "^4.7.4",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.65.0",
+    "valibot": "^1.4.2",
+    "varlock": "^1.14.1",
+    "vite": "^8.1.5",
+    "vite-plugin-devtools-json": "^1.1.0"
+  }
+}

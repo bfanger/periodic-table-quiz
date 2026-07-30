@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+/node-compile-cache
+/.pnpm-store
+/.svelte-kit
+/.vercel
+/build
+/dist
+/functions
+/test-results
+/vite.config.ts.timestamp-*.mjs
+.env
