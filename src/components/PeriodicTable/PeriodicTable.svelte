@@ -1,13 +1,15 @@
 <script lang="ts">
-  import { elements } from "./elements";
+  import { elements } from "../../elements";
   import ElementCard from "./ElementCard.svelte";
-  import type { PeriodicElement } from "./elements";
+  import type { PeriodicElement } from "../../elements";
 
   type Props = {
     mode: "symbol" | "name";
-    onClick: (element: PeriodicElement | null) => void;
+    onClick: (element: PeriodicElement) => void;
+    onEnter?: (element: PeriodicElement) => void;
+    onLeave?: (element: PeriodicElement) => void;
   };
-  let { onClick, mode }: Props = $props();
+  let { onClick, onEnter, onLeave, mode }: Props = $props();
 </script>
 
 <div
@@ -16,7 +18,13 @@
 >
   {#each elements as element}
     <div style="grid-column: {element.col}; grid-row: {element.row};">
-      <ElementCard {element} {onClick} {mode} />
+      <ElementCard
+        {element}
+        onClick={() => onClick(element)}
+        onEnter={() => onEnter?.(element)}
+        onLeave={() => onLeave?.(element)}
+        {mode}
+      />
     </div>
   {/each}
 </div>
