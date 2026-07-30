@@ -4,9 +4,10 @@
   import type { PeriodicElement } from "./elements";
 
   type Props = {
-    onSelect: (element: PeriodicElement | null) => void;
+    mode: "symbol" | "name";
+    onClick: (element: PeriodicElement | null) => void;
   };
-  let { onSelect }: Props = $props();
+  let { onClick, mode }: Props = $props();
 </script>
 
 <div
@@ -15,7 +16,7 @@
 >
   {#each elements as element}
     <div style="grid-column: {element.col}; grid-row: {element.row};">
-      <ElementCard {element} {onSelect} />
+      <ElementCard {element} {onClick} {mode} />
     </div>
   {/each}
 </div>
